@@ -5,9 +5,9 @@ Slides and assets for the Blockchain workshop [first presented at Toronto Ruby H
 Workshop for learning Blockchains and Smart Contracts
 Created by David Andrews
 
-![Blockchains](https://github.com/k00ka/smart-contracts/blob/master/media/screenshot.jpg)
+![How a Blockchain Works](https://github.com/k00ka/smart-contracts/blob/master/media/how_blockchain_works.png)
 
-Slides for the workshop are here:  
+Slides for the workshop are coming soon:  
 https://gnab.github.io/remark/remarkise?url=https://raw.githubusercontent.com/k00ka/smart-contracts/master/SLIDES.md
 
 ###Introduction
@@ -54,58 +54,60 @@ Here are the steps to get you started with the repo.
   You are (almost) there!
 
 1. Install ``geth``
-Instructions for installing geth can be found here:
-https://github.com/ethereum/go-ethereum
-On OSX:
-```
-% brew tap ethereum/ethereum
-% brew install ethereum
-```
+  Instructions for installing geth can be found here:
+  https://github.com/ethereum/go-ethereum
+  On OSX:
+  ```
+  % brew tap ethereum/ethereum
+  % brew install ethereum
+  ```
+  Extra instructions for Ubuntu are found here: (thanks @rafa)
+  https://github.com/ethereum/webthree-umbrella/wiki/Building-on-Ubuntu
 
 1. Start an instance of geth in development mode, with miners:
-```
-% geth --dev --mine --minerthreads 1
-```
-The above command is also here:
-```
-% bin/start_geth.sh
-```
+  ```
+  % geth --dev --mine --minerthreads 1
+  ```
+  The above command is also here:
+  ```
+  % bin/start_geth.sh
+  ```
 
 1. Once the above is started, copy endpoint URL out of the log and set environment:
-```
-% GETH_ENDPOINT="/var/folders/tz/5kjsfbw11clgdl4d0ydk6cv40000gn/T/ethereum_dev_mode/geth.ipc”
-% export GETH_ENDPOINT
-```
+  ```
+  % GETH_ENDPOINT="/var/folders/tz/5kjsfbw11clgdl4d0ydk6cv40000gn/T/ethereum_dev_mode/geth.ipc”
+  % export GETH_ENDPOINT
+  ```
 
-For instance, run the following test to create an account:
-```
-% ruby lib/basic.rb
-```
-The geth admin API is documented here:
+  For instance, run the following test to create an account:
+  ```
+  % ruby lib/basic.rb
+  ```
+  The geth admin API is documented here:
 
 
 1. Install the Solidity compiler
-Solc installation instructions can be found here:
-https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial
-On OSX, if you’ve followed the instructions above:
-```
-% brew install solidity
-% brew linkapps solidity
-```
+  Solc installation instructions can be found here:
+  https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial
+  On OSX, if you’ve followed the instructions above:
+  ```
+  % brew install solidity
+  % brew linkapps solidity
+  ```
 
-1. **wait**
-
-```
-% which solc
-/usr/local/bin/solc
-```
+1. Watch 'b2' do... nothing.
 
 1. Register Solidity in geth
-```
-geth --dev console
-> eth.getCompilers()
-[]
-> admin.setSolc("/usr/local/bin/solc")
-> eth.getCompilers()
-['Solidity']
-```
+  ```
+  % which solc
+  /usr/local/bin/solc
+  ```
+  Copy the path above and paste into the commands below.
+  ```
+  geth --dev console
+  > eth.getCompilers()
+  []
+  > admin.setSolc("/usr/local/bin/solc")
+  > eth.getCompilers()
+  ['Solidity']
+  ```
