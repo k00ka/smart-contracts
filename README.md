@@ -62,6 +62,17 @@ On OSX:
 % brew install ethereum
 ```
 
+Note: if you build from source, `make geth` only complies the binary `<pwd>/build/bin/geth`. You will need to add this to your path manually, or prefix the `geth` commands to use the absolute path, i.e. `/path/to/go-ethereum/build/bin/geth --dev ...` in the following.
+
+1. Create an etherbase account.
+```
+$ geth --dev account new
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Passphrase:
+Repeat passphrase:
+Address: {...long hex string ...}
+```
+
 1. Start an instance of geth in development mode, with miners:
 ```
 % geth --dev --mine --minerthreads 1
@@ -71,27 +82,41 @@ The above command is also here:
 % bin/start_geth.sh
 ```
 
-1. Once the above is started, copy endpoint URL out of the log and set environment:
+If this command fails and the error message (last line) is `Fatal: Failed to start mining: Cannot start mining without etherbase address: etherbase address must be explicitly specified`, you must complete the previous step.
+
+1. Once the above is started, copy the IPC file descriptor from the log. There should be an entry, similar to:
+```
+... logs entries ...
+I0919 20:11:17.176079 node/node.go:296] IPC endpoint opened: /tmp/ethereum_dev_mode/geth.ipc
+... more log entries ...
+```
+(The actual temp folder `/tmp` may vary between OSes.)
+
+Note: a URI (starting with `enode://...@[::]:36626`) is also printed, however, using it may lead to `too long unix socket path` errors when connecting with the Ruby client.
+
+Set the environment:
 ```
 % GETH_ENDPOINT="/var/folders/tz/5kjsfbw11clgdl4d0ydk6cv40000gn/T/ethereum_dev_mode/geth.ipc”
 % export GETH_ENDPOINT
 ```
 
-For instance, run the following test to create an account:
+Next, test the connection to your node:
 ```
 % ruby lib/basic.rb
 ```
 The geth admin API is documented here:
 
-
 1. Install the Solidity compiler
 Solc installation instructions can be found here:
-https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial
+[https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial](https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial)
+
 On OSX, if you’ve followed the instructions above:
 ```
 % brew install solidity
 % brew linkapps solidity
 ```
+
+For Ubuntu users, there is a PPA of the binary available (much faster to install than compile). Follow the [instructions here](https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial#install-solc-on-ubuntu).
 
 1. **wait**
 
