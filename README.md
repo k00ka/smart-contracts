@@ -51,12 +51,23 @@ Here are the steps to get you started with the repo.
   ```sh
   % rbenv rehash
   ```
-  You are (almost) there!
-
+  
+1.  A protocol agent is required to interact with the blockchain. We will install "geth" - the GO language implementation of Ethereum. Instructions for installing go can be found here:
+  https://github.com/golang/go
+  Generally you can either download and install, or build from scratch.
+  
 1. Install ``geth``
   Instructions for installing geth can be found here:
-  https://github.com/ethereum/go-ethereum
-  On OSX:
+  https://github.com/ethereum/go-ethereum  
+  On OSX, it's working much better to build geth from scratch. Do this "beside" the location of this (smart-contracts) repo.
+  ```
+  # assuming you're looking at this file from the current working directory, you want to be "up one"...
+  % cd ..
+  % git clone https://github.com/ethereum/go-ethereum.git
+  % cd go-ethereum
+  % make
+  ```
+  Here's how to do it in homebrew:
   ```
   % brew tap ethereum/ethereum
   % brew install ethereum
